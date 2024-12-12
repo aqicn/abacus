@@ -1,6 +1,6 @@
 # AirBacus - Open Air Quality Data Store
 
-AirBacus is an open air quality data store. You can use this repo to download
+AirBacus is an open-air quality data store. You can use this repo to download
 the historical and real-time data from any AirBacus data store.
 
 ## Configuration
@@ -21,14 +21,14 @@ token = dummy-token-for-test-purpose-only
 
 ## Setup
 
-The script needs the `requests` and `sseclient` library for downloading the
+The script needs the `requests` and `sseclient` libraries in order to download the
 data.
 
 ```bash
-pip install requests sseclient
+pip install requests client
 ```
 
-## Downloading the station historical data
+## historical data download
 
 Check the example in the `app.py` file:
 
@@ -55,4 +55,27 @@ for station in stations:
     print("The CSV file is %d rows" % len(csv.split("\n")))
 
 ```
+
+When downloading a station's readings, the data will be cached in a Key Value store located in `datastore/cache`. 
+You can change the `datastore` folder path by editing the `waqi.store` property in the `abacus.ini` file.
+
+
+## Performance
+
+The airbacus is currenrtly hosted on an affordable VPS server. 
+while we are working on getting a more powerfull server, please be patient with the slow donwload.
+
+
+## Ongoing work
+
+[ ] Add information about the units used for the species
+[ ] Support for output formats: NetCDF, HDF5, Pandas, etc..
+[ ] Support for specifying the time period for historical data downwload
+[ ] Support for retrieving the real-time data
+[ ] Support for updatable download (only download the parts which are not already in cache)
+[ ] Add github sponsor information
+[ ] Add usage license 
+
+
+
 
