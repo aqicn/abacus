@@ -1,5 +1,7 @@
 # AirBacus - Open Air Quality Data Store
 
+[![CI](https://github.com/aqicn/abacus/actions/workflows/ruff.yaml/badge.svg)](https://github.com/aqicn/abacus/actions/workflows/ruff.yaml)
+
 AirBacus is an open-air quality data store. You can use this repo to download
 the historical and real-time data from any AirBacus data store.
 
