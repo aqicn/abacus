@@ -112,7 +112,7 @@ class Store:
     def allStations(self):
         url = "/api/stations"
         stations = self.fetchJSON(url)
-        if stations == None:
+        if stations is None:
             return []
         return list(map(lambda x: Station(self, x), stations))
 
