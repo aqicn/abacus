@@ -57,7 +57,11 @@ class Store:
                 print("\nOh no!", e.data)
             elif m == "done":
                 break
-            elif m != "started":
+            elif e.event == "meta":
+                sys.stdout.write("\x1b[2K\r")
+                print(title, ": **"+e.data+"** ", end="")
+                sys.stdout.flush()
+            else:
                 st = ""
                 for x in m:
                     try:
