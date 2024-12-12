@@ -11,14 +11,20 @@ import csv
 import os
 import io
 
-import requests
-from sseclient import SSEClient
+from .fetch import SSEClient, Fetch
 
 
 class Configuration:
     def __init__(self, filename="airbacus.ini"):
         self.config = configparser.ConfigParser()
         self.config.read(filename)
+
+        if self.server().find("your-airbacus-server-endpoint") >= 0:
+            print("Please configure the airbacus server endpoint in %s" % filename)
+            exit(-1)
+        if self.token().find("dummy") >= 0:
+            print("Please configure the waqi token in %s" % filename)
+            exit(-1)
 
     def server(self):
         return self.config.get("airbacus", "server")
@@ -30,22 +36,6 @@ class Configuration:
 
     def token(self):
         return self.config.get("waqi", "token")
-
-
-class Response:
-    text: str
-    status_code: int
-
-    def __init__(self, text, status_code):
-        self.status_code = status_code
-        self.text = text
-
-    def json(self):
-        try:
-            output = json.loads(self.text)
-        except json.JSONDecodeError:
-            output = None
-        return output
 
 
 class Store:
@@ -61,8 +51,7 @@ class Store:
             },
         )
         samples = []
-        while True:
-            e = next(client)
+        for e in client.events():
             m = json.loads(e.data)
             if e.event == "error":
                 print("\nOh no!", e.data)
@@ -88,23 +77,25 @@ class Store:
         return samples
 
     def fetchJSON(self, url):
-        r = requests.get(
+        r = Fetch(
             self.config.server() + url,
             headers={
                 "X-Waqi-Token": self.config.token(),
                 "X-AirBacus-Client": "py/1.0.0",
             },
         )
+        if r.status_code == 0:
+            print("Sorry, failed to fetch %s: %s" % (url, r.text))
+            return None
+
         if r.status_code != 200:
             print("Sorry, failed to fetch %s: http error %d" % (url, r.status_code))
-            print(r.text)
             return None
 
         json = r.json()
         if json is None:
-            print(
-                "Sorry, failed to fetch %s: invalid JSON (%s...)" % (url, r.text[:50])
-            )
+            snippet = r.text[:50]
+            print("Sorry, failed to fetch %s: invalid JSON (%s...)" % (url, snippet))
             return None
 
         return json["data"]

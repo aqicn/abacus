@@ -1,2 +1,5 @@
 datastore/
 *.pyc
+__pycache__
+pyenv
+.ruff_cache

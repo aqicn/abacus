@@ -23,12 +23,7 @@ token = dummy-token-for-test-purpose-only
 
 ## Setup
 
-The script needs the `requests` and `sseclient` libraries in order to download the
-data.
-
-```bash
-pip install requests client
-```
+The Python3 script is dependency free. You do not need to install any library to run it.
 
 ## historical data download
 
