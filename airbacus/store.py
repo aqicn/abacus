@@ -59,7 +59,7 @@ class Store:
                 break
             elif e.event == "meta":
                 sys.stdout.write("\x1b[2K\r")
-                print(title, ": **"+e.data+"** ", end="")
+                print(title, ": **" + e.data + "** ", end="")
                 sys.stdout.flush()
             else:
                 st = ""
@@ -100,6 +100,13 @@ class Store:
         if json is None:
             snippet = r.text[:50]
             print("Sorry, failed to fetch %s: invalid JSON (%s...)" % (url, snippet))
+            return None
+
+        if json["status"] != "ok":
+            print(
+                "Sorry, failed to fetch %s: the server says '%s': %s"
+                % (url, json["status"], json)
+            )
             return None
 
         return json["data"]
