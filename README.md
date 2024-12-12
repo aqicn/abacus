@@ -56,25 +56,25 @@ for station in stations:
 
 ```
 
-When downloading a station's readings, the data will be cached in a Key Value store located in `datastore/cache`. 
+When downloading a station's readings, the data will be cached in a Key-Value store located in `datastore/cache`. 
 You can change the `datastore` folder path by editing the `waqi.store` property in the `abacus.ini` file.
 
 
 ## Performance
 
-The airbacus is currenrtly hosted on an affordable VPS server. 
-while we are working on getting a more powerfull server, please be patient with the slow donwload.
+The AirBacus server is currently hosted on an affordable VPS server. 
+while we are working on getting sponsors to upgrade to a more powerful server, please be patient with the slow downloads.
 
 
 ## Ongoing work
 
-[ ] Add information about the units used for the species
-[ ] Support for output formats: NetCDF, HDF5, Pandas, etc..
-[ ] Support for specifying the time period for historical data downwload
-[ ] Support for retrieving the real-time data
-[ ] Support for updatable download (only download the parts which are not already in cache)
-[ ] Add github sponsor information
-[ ] Add usage license 
+ - [ ] Add information about the units used for the species
+ - [ ] Support for output formats: NetCDF, HDF5, Pandas, etc.
+ - [ ] Support for specifying the time period for historical data download
+ - [ ] Support for retrieving the real-time data
+ - [ ] Support for updatable download (only download the parts which are not already in the cache)
+ - [ ] Add GitHub sponsor information
+ - [ ] Add usage license 
 
 
 
