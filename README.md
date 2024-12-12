@@ -23,7 +23,7 @@ token = dummy-token-for-test-purpose-only
 
 ## Setup
 
-The Python3 script is dependency free. You do not need to install any library to run it.
+The Python3 script is dependency free, so you do *not* need to install any library to run it.
 
 ## historical data download
 
@@ -59,8 +59,12 @@ You can change the `datastore` folder path by editing the `waqi.store` property 
 
 ## Performance
 
-The AirBacus server is currently hosted on an affordable VPS server. 
-while we are working on getting sponsors to upgrade to a more powerful server, please be patient with the slow downloads.
+The AirBacus server implementation is an highly optimized TSDB (time series DB) server, written in Golang, and which can take 1000 concurrent requests without any issues.
+
+However,  the current physical server on which the AirBacus server is running is a low-cost shared VPS, with only two cores (shared with other processes) and 2G of RAM.
+
+While working on getting sponsors to upgrade to a more powerful VPS server, the download speed is limited to one concurrent request. So, please, be patient with the slow downloads.
+
 
 
 ## Ongoing work
